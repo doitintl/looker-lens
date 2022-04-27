@@ -1,8 +1,12 @@
-connection: "chris-playground"
+connection: "@{CONNECTION_NAME}"
 
 include: "/views/*.view.lkml"                # include all views in the views/ folder in this project
 
 explore: history_data {
+  always_filter: {
+    filters: [billing_export.export_date: "30 days", history_data.history_created_date: "30 days"]
+  }
+  label: "LOOKER LENS 🔎"
   join: billing_export {
     view_label: "Billing Export"
     sql_on: ${history_data.history_id} = ${billing_export.history_id}
@@ -47,56 +51,56 @@ explore: history_data {
   }
 
   join: info_schema {
-    view_label: "Info Schema"
+    view_label: "Information Schema"
     sql_on: ${history_data.history_id} = ${info_schema.history_id};;
     relationship: one_to_one
   }
 
-  join: info_schema__labels {
-    view_label: "Info Schema: Labels"
-    sql: LEFT JOIN UNNEST(${info_schema.labels}) as info_schema__labels ;;
-    relationship: one_to_many
-  }
+  #join: info_schema__labels {
+  #  view_label: "Info Schema: Labels"
+  #  sql: LEFT JOIN UNNEST(${info_schema.labels}) as info_schema__labels ;;
+  #  relationship: one_to_many
+  #}
 
-  join: info_schema__timeline {
-    view_label: "Info Schema: Timeline"
-    sql: LEFT JOIN UNNEST(${info_schema.timeline}) as info_schema__timeline ;;
-    relationship: one_to_many
-  }
+  #join: info_schema__timeline {
+  #  view_label: "Info Schema: Timeline"
+  #  sql: LEFT JOIN UNNEST(${info_schema.timeline}) as info_schema__timeline ;;
+  #  relationship: one_to_many
+  #}
 
-  join: info_schema__job_stages {
-    view_label: "Info Schema: Job Stages"
-    sql: LEFT JOIN UNNEST(${info_schema.job_stages}) as info_schema__job_stages ;;
-    relationship: one_to_many
-  }
+  #join: info_schema__job_stages {
+  #  view_label: "Info Schema: Job Stages"
+  #  sql: LEFT JOIN UNNEST(${info_schema.job_stages}) as info_schema__job_stages ;;
+  #  relationship: one_to_many
+  #}
 
-  join: info_schema__referenced_tables {
-    view_label: "Info Schema: Referenced Tables"
-    sql: LEFT JOIN UNNEST(${info_schema.referenced_tables}) as info_schema__referenced_tables ;;
-    relationship: one_to_many
-  }
+  #join: info_schema__referenced_tables {
+  #  view_label: "Info Schema: Referenced Tables"
+  #  sql: LEFT JOIN UNNEST(${info_schema.referenced_tables}) as info_schema__referenced_tables ;;
+  #  relationship: one_to_many
+  #}
 
-  join: info_schema__job_stages__steps {
-    view_label: "Info Schema: Job Stages Steps"
-    sql: LEFT JOIN UNNEST(${info_schema__job_stages.steps}) as info_schema__job_stages__steps ;;
-    relationship: one_to_many
-  }
+  #join: info_schema__job_stages__steps {
+  #  view_label: "Info Schema: Job Stages Steps"
+  #  sql: LEFT JOIN UNNEST(${info_schema__job_stages.steps}) as info_schema__job_stages__steps ;;
+  #  relationship: one_to_many
+  #}
 
-  join: info_schema__job_stages__input_stages {
-    view_label: "Info Schema: Job Stages Input Stages"
-    sql: LEFT JOIN UNNEST(${info_schema__job_stages.input_stages}) as info_schema__job_stages__input_stages ;;
-    relationship: one_to_many
-  }
+  #join: info_schema__job_stages__input_stages {
+  #  view_label: "Info Schema: Job Stages Input Stages"
+  #  sql: LEFT JOIN UNNEST(${info_schema__job_stages.input_stages}) as info_schema__job_stages__input_stages ;;
+  #  relationship: one_to_many
+  #}
 
-  join: info_schema__job_stages__steps__substeps {
-    view_label: "Info Schema: Job Stages Steps Substeps"
-    sql: LEFT JOIN UNNEST(${info_schema__job_stages__steps.substeps}) as info_schema__job_stages__steps__substeps ;;
-    relationship: one_to_many
-  }
+  #join: info_schema__job_stages__steps__substeps {
+  #  view_label: "Info Schema: Job Stages Steps Substeps"
+  #  sql: LEFT JOIN UNNEST(${info_schema__job_stages__steps.substeps}) as info_schema__job_stages__steps__substeps ;;
+  #  relationship: one_to_many
+  #}
 
-  join: info_schema__bi_engine_statistics__bi_engine_reasons {
-    view_label: "Info Schema: Bi Engine Statistics Bi Engine Reasons"
-    sql: LEFT JOIN UNNEST(${info_schema.bi_engine_statistics__bi_engine_reasons}) as info_schema__bi_engine_statistics__bi_engine_reasons ;;
-    relationship: one_to_many
-  }
+  #join: info_schema__bi_engine_statistics__bi_engine_reasons {
+  #  view_label: "Info Schema: Bi Engine Statistics Bi Engine Reasons"
+  #  sql: LEFT JOIN UNNEST(${info_schema.bi_engine_statistics__bi_engine_reasons}) as info_schema__bi_engine_statistics__bi_engine_reasons ;;
+  #  relationship: one_to_many
+  #}
 }

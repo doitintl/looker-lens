@@ -2,8 +2,7 @@
 view: info_schema {
   # The sql_table_name parameter indicates the underlying database table
   # to be used for all fields in this view.
-  sql_table_name: `chris-playground-297209.region-us.INFORMATION_SCHEMA.JOBS_BY_PROJECT`
-    ;;
+  sql_table_name: `@{INFORMATION_SCHEMA_TABLE}`  ;;
   # No primary key is defined for this view. In order to join this view in an Explore,
   # define primary_key: yes on a dimension that has no repeated values.
 

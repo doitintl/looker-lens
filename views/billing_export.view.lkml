@@ -1,11 +1,5 @@
 view: billing_export {
-  sql_table_name: `chris-playground-297209.looker_lens.billing_export_v1_01A29B_B56F30_AA75{% parameter location %}`
-    ;;
-
-  parameter: location {
-    default_value: "97"
-    type: unquoted
-  }
+  sql_table_name: `@{BILLING_EXPORT_TABLE}`;;
 
   dimension: history_id {
     type: string
