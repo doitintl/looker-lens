@@ -13,7 +13,7 @@ Your service account needs access to the following datasets:
 
 ## Constants & Parameter Documentation
 
-|fd       | Description | required    |
+|Constant       | Description | required    |
 | :--- |    :----:   |:---: |
 | CONNECTION_NAME      | Title       | yes   |
 | BILLING_EXPORT_TABLE   | Text        | yes      |
