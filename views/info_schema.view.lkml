@@ -244,23 +244,42 @@ view: info_schema {
     sql: ${TABLE}.timeline ;;
   }
 
-  dimension: total_bytes_billed {
-    type: number
+  measure: total_bytes_billed {
+    group_label: "Totals"
+    type: sum
     sql: ${TABLE}.total_bytes_billed ;;
   }
 
-  dimension: total_bytes_processed {
-    type: number
+  measure: total_bytes_processed {
+    group_label: "Totals"
+    type: sum
     sql: ${TABLE}.total_bytes_processed ;;
   }
 
-  dimension: total_modified_partitions {
-    type: number
+  measure: total_modified_partitions {
+    group_label: "Totals"
+    type: sum
     sql: ${TABLE}.total_modified_partitions ;;
   }
 
-  dimension: total_slot_ms {
-    type: number
+
+  measure: total_gigabytes_billed {
+    group_label: "Totals"
+    type: sum
+    sql: ${TABLE}.total_bytes_billed/pow(10,9);;
+    value_format: "0.00"
+  }
+
+  measure: total_gigabytes_processed {
+    group_label: "Totals"
+    type: sum
+    sql: ${TABLE}.total_bytes_processed/pow(10,9) ;;
+    value_format: "0.00"
+  }
+
+  measure: total_slot_ms {
+    group_label: "Totals"
+    type: sum
     sql: ${TABLE}.total_slot_ms ;;
   }
 
@@ -272,11 +291,6 @@ view: info_schema {
   dimension: user_email {
     type: string
     sql: ${TABLE}.user_email ;;
-  }
-
-  measure: count {
-    type: count
-    drill_fields: []
   }
 }
 
@@ -337,13 +351,13 @@ view: info_schema__timeline {
     sql: ${active_units} ;;
   }
 
-  dimension: completed_units {
-    type: number
+  measure: completed_units {
+    type: sum
     sql: completed_units ;;
   }
 
-  dimension: elapsed_ms {
-    type: number
+  measure: elapsed_ms {
+    type: sum
     sql: elapsed_ms ;;
   }
 
@@ -356,13 +370,13 @@ view: info_schema__timeline {
     sql: info_schema__timeline ;;
   }
 
-  dimension: pending_units {
-    type: number
+  measure: pending_units {
+    type: sum
     sql: pending_units ;;
   }
 
-  dimension: total_slot_ms {
-    type: number
+  measure: total_slot_ms {
+    type: sum
     sql: ${TABLE}.total_slot_ms ;;
   }
 }

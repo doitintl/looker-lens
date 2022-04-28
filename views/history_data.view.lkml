@@ -289,4 +289,11 @@ view: history_data {
     type: count
     drill_fields: [user_name, history_connection_name, dashboard_created_time, history_created_time]
   }
+
+  measure: count_distinct_history_id {
+    type: count_distinct
+    sql: ${TABLE}.history_id ;;
+    }
+
+
 }
