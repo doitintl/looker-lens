@@ -233,6 +233,7 @@ view: history_data {
   }
 
   dimension: query_custom_fields {
+    hidden: yes
     type: string
     sql: ${TABLE}.query_custom_fields ;;
   }

@@ -3,6 +3,7 @@ view: info_schema {
   # The sql_table_name parameter indicates the underlying database table
   # to be used for all fields in this view.
   sql_table_name: `@{INFORMATION_SCHEMA_TABLE}`  ;;
+  #drill_fields: []
   # No primary key is defined for this view. In order to join this view in an Explore,
   # define primary_key: yes on a dimension that has no repeated values.
 
@@ -179,20 +180,6 @@ view: info_schema {
     sql: ${TABLE}.project_number ;;
   }
 
-  # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
-  # measures for this dimension, but you can also add measures of many different aggregates.
-  # Click on the type parameter to see all the options in the Quick Help panel on the right.
-
-  measure: total_project_number {
-    type: sum
-    sql: ${project_number} ;;
-  }
-
-  measure: average_project_number {
-    type: average
-    sql: ${project_number} ;;
-  }
-
   dimension: query {
     type: string
     sql: ${TABLE}.query ;;
@@ -244,6 +231,20 @@ view: info_schema {
     sql: ${TABLE}.timeline ;;
   }
 
+
+  dimension: transaction_id {
+    hidden: yes
+    type: string
+    sql: ${TABLE}.transaction_id ;;
+  }
+
+  dimension: user_email {
+    type: string
+    sql: ${TABLE}.user_email ;;
+  }
+
+# MEASURES
+## TOTALS
   measure: total_bytes_billed {
     group_label: "Totals"
     type: sum
@@ -261,7 +262,6 @@ view: info_schema {
     type: sum
     sql: ${TABLE}.total_modified_partitions ;;
   }
-
 
   measure: total_gigabytes_billed {
     group_label: "Totals"
@@ -283,15 +283,87 @@ view: info_schema {
     sql: ${TABLE}.total_slot_ms ;;
   }
 
-  dimension: transaction_id {
-    type: string
-    sql: ${TABLE}.transaction_id ;;
+  measure: total_slot_consuption {
+    group_label: "Totals"
+    type: sum
+    sql: ${TABLE} / (1000 * 60 * 60 ) ;;
   }
 
-  dimension: user_email {
-    type: string
-    sql: ${TABLE}.user_email ;;
+
+  measure: total_query_duration_ms {
+    group_label: "Totals"
+    type: sum
+    sql: ${TABLE}.end_time -${TABLE}.start_time;;
   }
+
+## AVG
+  measure: avg_gigabytes_billed {
+    group_label: "Average"
+    type: average
+    sql: ${TABLE}.total_bytes_billed/pow(10,9);;
+    value_format: "0.00"
+  }
+
+  measure: avg_gigabytes_processed {
+    group_label: "Average"
+    type: average
+    sql: ${TABLE}.total_bytes_processed/pow(10,9) ;;
+    value_format: "0.00"
+  }
+
+  measure: avg_slot_ms {
+    group_label: "Average"
+    type: average
+    sql: ${TABLE}.total_slot_ms ;;
+  }
+
+  measure: avg_query_duration_ms {
+    group_label: "Average"
+    type: average
+    sql: ${TABLE}.end_time -${TABLE}.start_time;;
+  }
+
+  measure: avg_slot_consumption {
+    group_label: "Average"
+    type: average
+    sql: ${TABLE} / (1000 * 60 * 60 ) ;;
+  }
+
+## MAX
+  measure: max_gigabytes_billed {
+    group_label: "Maximum"
+    type: average
+    sql: ${TABLE}.total_bytes_billed/pow(10,9);;
+    value_format: "0.00"
+  }
+
+  measure: max_gigabytes_processed {
+    group_label: "Maximum"
+    type: average
+    sql: ${TABLE}.total_bytes_processed/pow(10,9) ;;
+    value_format: "0.00"
+  }
+
+  measure: max_slot_ms {
+    group_label: "Maximum"
+    type: average
+    sql: ${TABLE}.total_slot_ms ;;
+  }
+
+  measure: max_query_duration_ms {
+    group_label: "Maximum"
+    type: max
+    sql: ${TABLE}.end_time -${TABLE}.start_time;;
+  }
+
+  measure: max_slot_consumption {
+    group_label: "Maximum"
+    type: average
+    sql: ${TABLE} / (1000 * 60 * 60 ) ;;
+  }
+
+  ## END
+
 }
 
 # The name of this view in Looker is "Info Schema Labels"
@@ -380,6 +452,8 @@ view: info_schema__timeline {
     sql: ${TABLE}.total_slot_ms ;;
   }
 }
+
+
 
 # The name of this view in Looker is "Info Schema Job Stages"
 view: info_schema__job_stages {
@@ -685,4 +759,5 @@ view: info_schema__bi_engine_statistics__bi_engine_reasons {
     type: string
     sql: ${TABLE}.message ;;
   }
+
 }

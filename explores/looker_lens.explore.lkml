@@ -1,4 +1,4 @@
-include: "/views/*.lkml"
+include: "/views/*.view"
 
 explore: history_data {
   description: "This explore allows you to slice and dice your looker history data togther with metrics from GCP. The default range of data you are looking at is in the past 30 days"
@@ -52,7 +52,7 @@ explore: history_data {
   }
 
   join: info_schema {
-    view_label: "Information Schema"
+    view_label: "Big Query: Information Schema"
     sql_on: ${history_data.history_id} = ${info_schema.history_id};;
     relationship: one_to_one
   }

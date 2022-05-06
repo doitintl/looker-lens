@@ -365,9 +365,17 @@ view: billing_export {
 
   ### combined metrics
   measure: gb_per_history_id {
-    group_label: "Usage"
+    group_label: "Advanced"
     sql: ${info_schema.total_gigabytes_processed} / ${history_data.history_count};;
   }
+
+
+  measure: max_query_gb {
+    group_label: "Advanced"
+    type: max
+    sql: ${info_schema.total_gigabytes_processed}/pow(10,9) ;;
+  }
+
 
 
   #max query price, > drill down per dashbaord
