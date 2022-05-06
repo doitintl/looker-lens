@@ -244,16 +244,19 @@ view: history_data {
   }
 
   dimension: query_fields_used {
+    hidden: yes
     type: string
     sql: ${TABLE}.query_fields_used ;;
   }
 
   dimension: query_fill_fields {
+    hidden: yes
     type: string
     sql: ${TABLE}.query_fill_fields ;;
   }
 
   dimension: query_filters {
+    hidden: yes
     type: string
     sql: ${TABLE}.query_filters ;;
   }
@@ -269,6 +272,7 @@ view: history_data {
   }
 
   dimension: query_pivots_used {
+    hidden: yes
     type: string
     sql: ${TABLE}.query_pivots_used ;;
   }

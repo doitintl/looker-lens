@@ -63,11 +63,11 @@ explore: history_data {
   #  relationship: one_to_many
   #}
 
-  join: info_schema__timeline {
-    view_label: "Info Schema: Timeline"
-    sql: LEFT JOIN UNNEST(${info_schema.timeline}) as info_schema__timeline ;;
-    relationship: one_to_many
-  }
+  #join: info_schema__timeline {
+  #  view_label: "Info Schema: Timeline"
+  #  sql: LEFT JOIN UNNEST(${info_schema.timeline}) as info_schema__timeline ;;
+  #  relationship: one_to_many
+  #}
 
   #join: info_schema__job_stages {
   #  view_label: "Info Schema: Job Stages"

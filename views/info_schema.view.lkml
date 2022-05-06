@@ -289,7 +289,6 @@ view: info_schema {
     sql: ${TABLE} / (1000 * 60 * 60 ) ;;
   }
 
-
   measure: total_query_duration_ms {
     group_label: "Totals"
     type: sum
@@ -326,7 +325,7 @@ view: info_schema {
   measure: avg_slot_consumption {
     group_label: "Average"
     type: average
-    sql: ${TABLE} / (1000 * 60 * 60 ) ;;
+    sql: ${TABLE}.total_slot_ms / (1000 * 60 * 60 ) ;;
   }
 
 ## MAX
@@ -359,7 +358,7 @@ view: info_schema {
   measure: max_slot_consumption {
     group_label: "Maximum"
     type: average
-    sql: ${TABLE} / (1000 * 60 * 60 ) ;;
+    sql: ${TABLE}.total_slot_ms / (1000 * 60 * 60 ) ;;
   }
 
   ## END
