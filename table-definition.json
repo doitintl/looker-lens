@@ -1,0 +1,253 @@
+{
+    "csvOptions": {
+        "allowJaggedRows": false,
+        "allowQuotedNewlines": false,
+        "encoding": "UTF-8",
+        "fieldDelimiter": ",",
+        "quote": "\"",
+        "skipLeadingRows": 1
+    },
+    "sourceFormat": "CSV",
+    "sourceUris": [
+        "gs://chris-playground-297209/looker-lens-01/*"
+    ],
+    "schema": {
+        "fields": [
+            {
+                "name": "row_number",
+                "type": "INTEGER",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "look_title",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_attempted_cache",
+                "type": "BOOLEAN",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_cache_key",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_result_source",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_completed_time",
+                "type": "TIMESTAMP",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_connection_id",
+                "type": "INTEGER",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_connection_name",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_dialect",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_created_time",
+                "type": "TIMESTAMP",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_dashboard_id__inclusive_",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_dashboard_session",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_id",
+                "type": "INTEGER",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_message",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_most_recent_query_run_at_time",
+                "type": "TIMESTAMP",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_most_recent_run_length_in_seconds",
+                "type": "FLOAT",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_is_single_query",
+                "type": "BOOLEAN",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_is_user_dashboard",
+                "type": "BOOLEAN",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_rebuild_pdts",
+                "type": "BOOLEAN",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_render_key",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_result_format",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_runtime_in_seconds",
+                "type": "FLOAT",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_slug",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_issuer_source",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_source",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_status",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "history_workspace_id",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "dashboard_id__user_defined_only_",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "dashboard_lookml_link_id",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "dashboard_title",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "dashboard_created_time",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "dashboard_link",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "dashboard_moved_to_trash_time",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "dashboard_refresh_interval",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "query_id",
+                "type": "INTEGER",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "query_explore",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "query_model",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "query_custom_fields",
+                "type": "JSON",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "query_fields_used",
+                "type": "JSON",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "query_fill_fields",
+                "type": "json",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "query_filters",
+                "type": "JSON",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "query_pivots_used",
+                "type": "JSON",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "look_id",
+                "type": "INTEGER",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "merge_query_id",
+                "type": "INTEGER",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "user_id",
+                "type": "INTEGER",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "user_email",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            },
+            {
+                "name": "user_name",
+                "type": "STRING",
+                "mode": "NULLABLE"
+            }
+        ]
+    }
+}
