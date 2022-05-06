@@ -1,3 +1,5 @@
+include: "../views/*.view"
+
 # The name of this view in Looker is "Test3"
 view: history_data {
   view_label: "Looker: History Data"
@@ -290,10 +292,25 @@ view: history_data {
     drill_fields: [user_name, history_connection_name, dashboard_created_time, history_created_time]
   }
 
-  measure: count_distinct_history_id {
+  measure: history_count {
+    label: "counts"
     type: count_distinct
     sql: ${TABLE}.history_id ;;
+    drill_fields: [user_name, history_connection_name, dashboard_created_time, history_created_time]
     }
 
+  measure: query_count {
+    label: "counts"
+    type: count_distinct
+    sql: ${TABLE}.query_id ;;
+    drill_fields: [user_name, history_connection_name, dashboard_created_time, history_created_time]
+  }
 
+  measure: active_users{
+    label: "counts"
+    type: count_distinct
+    sql: ${TABLE}.user_id ;;
+    drill_fields: [user_name]
+
+  }
 }

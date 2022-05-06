@@ -1,6 +1,6 @@
 view: billing_export {
-  sql_table_name: `@{BILLING_EXPORT_TABLE}`;;
 
+  sql_table_name: `@{BILLING_EXPORT_TABLE}`;;
   dimension: history_id {
     type: string
     sql:  (SELECT CAST(value AS INT64) FROM UNNEST(${labels}) as label WHERE label.key = "looker-context-history_id" LIMIT 1);;
@@ -362,6 +362,24 @@ view: billing_export {
     group_label: "Usage"
     group_item_label: "Total Amount"
   }
+
+  ### combined metrics
+  measure: gb_per_history_id {
+    group_label: "Usage"
+    sql: ${info_schema.total_gigabytes_processed} / ${history_data.history_count};;
+  }
+
+
+  #max query price, > drill down per dashbaord
+  #max query bytes
+  #max slot consumption
+  #max (bq)query duration
+  #avg (bq)query duration
+  #count of active users,
+  #count of query ids
+
+
+
 }
 
 view: billing_export__labels {
@@ -500,25 +518,6 @@ view: billing_export__gcp_metrics {
   }
 }
 
-view: billing_export__system_labels {
-
-  dimension: billing_export__system_labels {
-    type: string
-    hidden: yes
-    sql: billing_export__system_labels ;;
-  }
-
-  dimension: key {
-    type: string
-    sql: key ;;
-  }
-
-  dimension: value {
-    type: string
-    sql: value ;;
-  }
-}
-
 view: billing_export__project__labels {
   dimension: key {
     type: string
@@ -529,4 +528,6 @@ view: billing_export__project__labels {
     type: string
     sql: ${TABLE}.value ;;
   }
+
+
 }

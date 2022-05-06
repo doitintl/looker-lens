@@ -7,6 +7,7 @@ explore: history_data {
     filters: [billing_export.export_date: "30 days", history_data.history_created_date: "30 days"]
   }
   label: "LOOKER LENS 🔎"
+
   join: billing_export {
     view_label: "Billing Export"
     sql_on: ${history_data.history_id} = ${billing_export.history_id}
@@ -38,11 +39,11 @@ explore: history_data {
     relationship: one_to_many
   }
 
-  join: billing_export__system_labels {
-    view_label: "Billing Export: System Labels"
-    sql: LEFT JOIN UNNEST(${billing_export.system_labels}) as billing_export__system_labels ;;
-    relationship: one_to_many
-  }
+  #join: billing_export__system_labels {
+  #  view_label: "Billing Export: System Labels"
+  #  sql: LEFT JOIN UNNEST(${billing_export.system_labels}) as billing_export__system_labels ;;
+  #  relationship: one_to_many
+  #}
 
   join: billing_export__project__labels {
     view_label: "Billing Export: Project Labels"
@@ -62,11 +63,11 @@ explore: history_data {
   #  relationship: one_to_many
   #}
 
-  #join: info_schema__timeline {
-  #  view_label: "Info Schema: Timeline"
-  #  sql: LEFT JOIN UNNEST(${info_schema.timeline}) as info_schema__timeline ;;
-  #  relationship: one_to_many
-  #}
+  join: info_schema__timeline {
+    view_label: "Info Schema: Timeline"
+    sql: LEFT JOIN UNNEST(${info_schema.timeline}) as info_schema__timeline ;;
+    relationship: one_to_many
+  }
 
   #join: info_schema__job_stages {
   #  view_label: "Info Schema: Job Stages"
