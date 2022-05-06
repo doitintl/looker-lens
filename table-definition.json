@@ -199,31 +199,6 @@
                 "mode": "NULLABLE"
             },
             {
-                "name": "query_custom_fields",
-                "type": "JSON",
-                "mode": "NULLABLE"
-            },
-            {
-                "name": "query_fields_used",
-                "type": "JSON",
-                "mode": "NULLABLE"
-            },
-            {
-                "name": "query_fill_fields",
-                "type": "json",
-                "mode": "NULLABLE"
-            },
-            {
-                "name": "query_filters",
-                "type": "JSON",
-                "mode": "NULLABLE"
-            },
-            {
-                "name": "query_pivots_used",
-                "type": "JSON",
-                "mode": "NULLABLE"
-            },
-            {
                 "name": "look_id",
                 "type": "INTEGER",
                 "mode": "NULLABLE"
