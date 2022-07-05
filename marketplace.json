@@ -15,9 +15,9 @@
       "label": "Billing Log Export Table Name",
       "description": "The table name of your BQ Optimization data (typically cloudaudit_googleapis_com_data_access_*)."
     },
-    "INFORMATION_SCHEMA_TABLE": {
-      "label": "Schema Name",
-      "description": "The table name of your BQ Optimization data (typically cloudaudit_googleapis_com_data_access_*)."
+    "AUDIT_LOG_TABLE": {
+      "label": "",
+      "description":""
     }
   },
   "models": [

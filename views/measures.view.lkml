@@ -99,12 +99,12 @@ view: +billing_export {
     group_item_label: "Cost"
   }
 
-  measure: total_discount__value {
-    type: sum
-    sql: ${discount__value} ;;
-    group_label: "Totals"
-    group_item_label: "Discount"
-  }
+  # measure: total_discount__value {
+  #   type: sum
+  #   sql: ${discount__value} ;;
+  #   group_label: "Totals"
+  #   group_item_label: "Discount"
+  # }
 
   measure: total_usage__amount {
     type:  sum
@@ -113,25 +113,41 @@ view: +billing_export {
     group_item_label: "Usage"
   }
 
-    # AVG
+  # AVG
   measure: avg_cost {
     type: average
     sql: ${cost} ;;
     group_label: "Average"
-    group_item_label: "Average Cost"
+    group_item_label: "Cost"
   }
 
-  measure: avg_discount__value {
-    type: average
-    sql: ${discount__value} ;;
-    group_label: "Average"
-    group_item_label: "Average Discount"
-  }
+  # measure: avg_discount__value {
+  #   type: average
+  #   sql: ${discount__value} ;;
+  #   group_label: "Average"
+  #   group_item_label: "Discount"
+  # }
 
   measure: avg_usage__amount {
     type:  average
     sql: ${usage__amount} ;;
     group_label: "Average"
-    group_item_label: "Average Usage"
+    group_item_label: "Usage"
   }
+}
+
+view: +job_statistics__reservation_usage {
+  measure: total_slot_ms {
+    type: sum
+    sql: ${slot_ms} ;;
+    group_label: "Totals"
+    group_item_label: "Reservation Usage"
   }
+
+  measure: avg_slot_ms {
+    type: sum
+    sql: ${slot_ms} ;;
+    group_label: "Average"
+    group_item_label: "Reservation Usage"
+  }
+}

@@ -1,18 +1,10 @@
 # The name of this view in Looker is "Cloudaudit Googleapis Com Data Access"
 view: bq_audit_logs {
-  view_label: "BQ Audit Logs"
-  # The sql_table_name parameter indicates the underlying database table
-  # to be used for all fields in this view.
-  sql_table_name: `chris-playground-297209.san_francisco.cloudaudit_googleapis_com_data_access`
-    ;;
-  # No primary key is defined for this view. In order to join this view in an Explore,
-  # define primary_key: yes on a dimension that has no repeated values.
 
-  # Here's what a typical dimension looks like in LookML.
-  # A dimension is a groupable field that can be used to filter query results.
-  # This dimension will be called "HTTP Request Cache Fill Bytes" in Explore.
+  sql_table_name: `@{AUDIT_LOG_TABLE}`;;
 
   dimension: history_id {
+    hidden: yes
     type: string
     sql:   (SELECT CAST(value AS INT64) FROM UNNEST(${labels_array}) as label WHERE label.key = "looker-context-history_id" LIMIT 1);;
     label: "Looker History ID"
@@ -24,17 +16,17 @@ view: bq_audit_logs {
     label: "Principal Email"
   }
 
-  dimension: event_name {
-    type: string
-    sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.eventName ;;
-    label: "Event Name"
-  }
+  # dimension: event_name {
+  #   type: string
+  #   sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.eventName ;;
+  #   label: "Event Name"
+  # }
 
-  dimension: dry_run {
-    type: yesno
-    sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.dryRun ;;
-    label: "Dry Run"
-  }
+  # dimension: dry_run {
+  #   type: yesno
+  #   sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.dryRun ;;
+  #   label: "Dry Run"
+  # }
 
   dimension: labels_array {
     hidden: yes
@@ -42,25 +34,25 @@ view: bq_audit_logs {
     label: "Labels"
   }
 
-   dimension: job_configuration__query__create_disposition {
-    type: string
-    sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.createDisposition ;;
-    label: "Create Disposition"
-  }
+  # dimension: job_configuration__query__create_disposition {
+  #   type: string
+  #   sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.createDisposition ;;
+  #   label: "Create Disposition"
+  # }
 
-  dimension: default_dataset__dataset_id {
-    type: string
-    sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.defaultDataset.datasetId ;;
-    group_label: "Default Dataset"
-    label: "Dataset ID"
-  }
+  # dimension: default_dataset__dataset_id {
+  #   type: string
+  #   sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.defaultDataset.datasetId ;;
+  #   group_label: "Default Dataset"
+  #   label: "Dataset ID"
+  # }
 
-  dimension: default_dataset__project_id {
-    type: string
-    sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.defaultDataset.projectId ;;
-    group_label: "Default Dataset"
-    group_item_label: "Project ID"
-  }
+  # dimension: default_dataset__project_id {
+  #   type: string
+  #   sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.defaultDataset.projectId ;;
+  #   group_label: "Default Dataset"
+  #   group_item_label: "Project ID"
+  # }
 
   dimension: destination_table__dataset_id {
     type: string
@@ -83,11 +75,11 @@ view: bq_audit_logs {
     group_item_label: "Table ID"
   }
 
-  dimension: kms_key_name {
-    type: string
-    sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.destinationTableEncryption.kmsKeyName ;;
-    label: "Kms Key Name"
-  }
+  # dimension: kms_key_name {
+  #   type: string
+  #   sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.destinationTableEncryption.kmsKeyName ;;
+  #   label: "Kms Key Name"
+  # }
 
   dimension: query {
     type: string
@@ -95,11 +87,11 @@ view: bq_audit_logs {
     label: "Query"
   }
 
-  dimension: query_priority {
-    type: string
-    sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.queryPriority ;;
-    label: "Query Priority"
-  }
+  # dimension: query_priority {
+  #   type: string
+  #   sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.queryPriority ;;
+  #   label: "Query Priority"
+  # }
 
   dimension: statement_type {
     type: string
@@ -113,11 +105,11 @@ view: bq_audit_logs {
     label: "Table Definitions"
   }
 
-  dimension: write_disposition {
-    type: string
-    sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.writeDisposition ;;
-    label: "Write Disposition"
-  }
+  # dimension: write_disposition {
+  #   type: string
+  #   sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.writeDisposition ;;
+  #   label: "Write Disposition"
+  # }
 
   dimension: job_name__job_id {
     type: string
@@ -147,35 +139,35 @@ view: bq_audit_logs {
     group_item_label: "Billing Tier"
   }
 
-  dimension_group: job_statistics__create {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.createTime ;;
-    label: "Create"
-  }
+  # dimension_group: job_statistics__create {
+  #   type: time
+  #   timeframes: [
+  #     raw,
+  #     time,
+  #     date,
+  #     week,
+  #     month,
+  #     quarter,
+  #     year
+  #   ]
+  #   sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.createTime ;;
+  #   label: "Create"
+  # }
 
-  dimension_group: job_statistics__end {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.endTime ;;
-    label: "Job End"
-  }
+  # dimension_group: job_statistics__end {
+  #   type: time
+  #   timeframes: [
+  #     raw,
+  #     time,
+  #     date,
+  #     week,
+  #     month,
+  #     quarter,
+  #     year
+  #   ]
+  #   sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.endTime ;;
+  #   label: "Job End"
+  # }
 
   dimension: job_statistics__query_output_row_count {
     type: number
@@ -184,7 +176,7 @@ view: bq_audit_logs {
     group_item_label: "Query Output Row Count"
   }
 
-  dimension: job_statistics__referenced_tables {
+  dimension: job_statistics__referenced_tables_array {
     hidden: yes
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.referencedTables ;;
     group_label: "Job Statistics"
@@ -198,28 +190,27 @@ view: bq_audit_logs {
     group_item_label: "Referenced Views"
   }
 
-  dimension: job_statistics__reservation_usage {
+  dimension: job_statistics__reservation_usage_array {
     hidden: yes
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.reservationUsage ;;
     group_label: "Job Statistics"
     group_item_label: "Reservation Usage"
   }
 
-  dimension_group: job_statistics__start {
-    type: time
-    timeframes: [
-      raw,
-      time,
-      date,
-      week,
-      month,
-      quarter,
-      year
-    ]
-    sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.startTime ;;
-    label: "Job Start"
-
-  }
+  # dimension_group: job_statistics__start {
+  #   type: time
+  #   timeframes: [
+  #     raw,
+  #     time,
+  #     date,
+  #     week,
+  #     month,
+  #     quarter,
+  #     year
+  #   ]
+  #   sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.startTime ;;
+  #   label: "Job Start"
+  # }
 
   dimension: job_statistics__total_billed_bytes {
     hidden: yes
@@ -276,42 +267,43 @@ view: bq_audit_logs {
     group_item_label: "Additional Errors"
   }
 
-  dimension: job_status__error__code {
-    type: number
-    sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatus.error.code ;;
-    group_label: "Status"
-    group_item_label: "Error Code"
-  }
+  # dimension: job_status__error__code {
+  #   type: number
+  #   sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatus.error.code ;;
+  #   group_label: "Status"
+  #   group_item_label: "Error Code"
+  # }
 
-  dimension: job_status__error__message {
-    type: string
-    sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatus.error.message ;;
-    group_label: "Status"
-    group_item_label: "Error Message"
-  }
+  # dimension: job_status__error__message {
+  #   type: string
+  #   sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatus.error.message ;;
+  #   group_label: "Status"
+  #   group_item_label: "Error Message"
+  # }
 
-  dimension: job_status__state {
-    type: string
-    sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatus.state ;;
-    group_label: "Status"
-    group_item_label: "State"
-  }
+  # dimension: job_status__state {
+  #   type: string
+  #   sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatus.state ;;
+  #   group_label: "Status"
+  #   group_item_label: "State"
+  # }
 
-  dimension: protopayload_auditlog__status__code {
-    type: number
-    sql: ${TABLE}.protopayload_auditlog.status.code ;;
-    group_label: "Status"
-    group_item_label: "Code"
-  }
+  # dimension: protopayload_auditlog__status__code {
+  #   type: number
+  #   sql: ${TABLE}.protopayload_auditlog.status.code ;;
+  #   group_label: "Status"
+  #   group_item_label: "Code"
+  # }
 
-  dimension: protopayload_auditlog__status__message {
-    type: string
-    sql: ${TABLE}.protopayload_auditlog.status.message ;;
-    group_label: "Status"
-    group_item_label: "Message"
-  }
+  # dimension: protopayload_auditlog__status__message {
+  #   type: string
+  #   sql: ${TABLE}.protopayload_auditlog.status.message ;;
+  #   group_label: "Status"
+  #   group_item_label: "Message"
+  # }
 
-  dimension_group: receive_timestamp {
+  dimension_group: timestamp {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -322,20 +314,12 @@ view: bq_audit_logs {
       quarter,
       year
     ]
-    sql: ${TABLE}.receiveTimestamp ;;
+    sql: ${TABLE}.timestamp ;;
+    description: "Used for partitioning"
   }
-
 }
 
-# The name of this view in Looker is "Cloudaudit Googleapis Com Data Access Job Completed Event Job Job Configuration Labels"
 view: job_configuration__labels {
-  # No primary key is defined for this view. In order to join this view in an Explore,
-  # define primary_key: yes on a dimension that has no repeated values.
-
-  # Here's what a typical dimension looks like in LookML.
-  # A dimension is a groupable field that can be used to filter query results.
-  # This dimension will be called "Key" in Explore.
-
   dimension: key {
     type: string
     sql: ${TABLE}.key ;;
@@ -349,30 +333,21 @@ view: job_configuration__labels {
   }
 }
 
-# The name of this view in Looker is "Cloudaudit Googleapis Com Data Access Job Completed Event Job Job Status Additional Errors"
-view: job_status__additional_errors {
-  dimension: code {
-    type: number
-    sql: ${TABLE}.code ;;
-    group_label: "Additional Errors"
-  }
+# view: job_status__additional_errors {
+#   dimension: code {
+#     type: number
+#     sql: ${TABLE}.code ;;
+#     group_label: "Additional Errors"
+#   }
 
-  dimension: message {
-    type: string
-    sql: ${TABLE}.message ;;
-    group_label: "Additional Errors"
-  }
-}
+#   dimension: message {
+#     type: string
+#     sql: ${TABLE}.message ;;
+#     group_label: "Additional Errors"
+#   }
+# }
 
-# The name of this view in Looker is "Cloudaudit Googleapis Com Data Access Job Completed Event Job Job Statistics Reservation Usage"
 view: job_statistics__reservation_usage {
-  # No primary key is defined for this view. In order to join this view in an Explore,
-  # define primary_key: yes on a dimension that has no repeated values.
-
-  # Here's what a typical dimension looks like in LookML.
-  # A dimension is a groupable field that can be used to filter query results.
-  # This dimension will be called "Name" in Explore.
-
   dimension: name {
     type: string
     sql: ${TABLE}.name ;;
@@ -380,22 +355,14 @@ view: job_statistics__reservation_usage {
   }
 
   dimension: slot_ms {
+    hidden: yes
     type: number
     sql: ${TABLE}.slotMs ;;
     group_label: "Reservation Usage"
   }
-
 }
 
-# The name of this view in Looker is "Cloudaudit Googleapis Com Data Access Job Completed Event Job Job Statistics Referenced Views"
 view: job_statistics__referenced_views {
-  # No primary key is defined for this view. In order to join this view in an Explore,
-  # define primary_key: yes on a dimension that has no repeated values.
-
-  # Here's what a typical dimension looks like in LookML.
-  # A dimension is a groupable field that can be used to filter query results.
-  # This dimension will be called "Dataset ID" in Explore.
-
   dimension: dataset_id {
     type: string
     sql: ${TABLE}.datasetId ;;
@@ -415,15 +382,7 @@ view: job_statistics__referenced_views {
   }
 }
 
-# The name of this view in Looker is "Cloudaudit Googleapis Com Data Access Job Completed Event Job Job Statistics Referenced Tables"
 view: job_statistics__referenced_tables {
-  # No primary key is defined for this view. In order to join this view in an Explore,
-  # define primary_key: yes on a dimension that has no repeated values.
-
-  # Here's what a typical dimension looks like in LookML.
-  # A dimension is a groupable field that can be used to filter query results.
-  # This dimension will be called "Dataset ID" in Explore.
-
   dimension: dataset_id {
     type: string
     sql: ${TABLE}.datasetId ;;
@@ -443,44 +402,25 @@ view: job_statistics__referenced_tables {
   }
 }
 
-# The name of this view in Looker is "Cloudaudit Googleapis Com Data Access Job Completed Event Job Job Configuration Query Table Definitions"
-view: job_configuration__query__table_definitions {
-  # No primary key is defined for this view. In order to join this view in an Explore,
-  # define primary_key: yes on a dimension that has no repeated values.
+# view: job_configuration__query__table_definitions {
+#   dimension: name {
+#     type: string
+#     sql: ${TABLE}.name ;;
+#     group_label: "Table Definitions"
+#   }
 
-  # Here's what a typical dimension looks like in LookML.
-  # A dimension is a groupable field that can be used to filter query results.
-  # This dimension will be called "Name" in Explore.
+#   dimension: source_uris {
+#     hidden: yes
+#     sql: ${TABLE}.sourceUris ;;
+#     group_label: "Table Definitions"
+#   }
+# }
 
-  dimension: name {
-    type: string
-    sql: ${TABLE}.name ;;
-    group_label: "Table Definitions"
-  }
-
-  # This field is hidden, which means it will not show up in Explore.
-  # If you want this field to be displayed, remove "hidden: yes".
-
-  dimension: source_uris {
-    hidden: yes
-    sql: ${TABLE}.sourceUris ;;
-    group_label: "Table Definitions"
-  }
-}
-
-# The name of this view in Looker is "Cloudaudit Googleapis Com Data Access Job Completed Event Job Job Configuration Query Table Definitions Source Uris"
-view: job_configuration__query__table_definitions__source_uris {
-  # No primary key is defined for this view. In order to join this view in an Explore,
-  # define primary_key: yes on a dimension that has no repeated values.
-
-  # Here's what a typical dimension looks like in LookML.
-  # A dimension is a groupable field that can be used to filter query results.
-  # This dimension will be called "Cloudaudit Googleapis Com Data Access Job Completed Event Job Job Configuration Query Table Definitions Source Uris" in Explore.
-
-  dimension: table_definitions__source_uris {
-    type: string
-    sql: job_configuration__query__table_definitions__source_uris ;;
-    group_label: "Table Definitions"
-    group_item_label: "Source URI"
-  }
-}
+# view: job_configuration__query__table_definitions__source_uris {
+#   dimension: table_definitions__source_uris {
+#     type: string
+#     sql: job_configuration__query__table_definitions__source_uris ;;
+#     group_label: "Table Definitions"
+#     group_item_label: "Source URI"
+#   }
+# }

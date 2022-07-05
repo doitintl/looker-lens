@@ -21,11 +21,11 @@ constant: BILLING_EXPORT_TABLE {
 }
 
 constant: LOOKER_HISTORY_TABLE {
-  value: "chris-playground-297209.looker_lens.test4"
+  value: "chris-playground-297209.looker_lens.test5"
   export: override_required
 }
 
-constant: INFORMATION_SCHEMA_TABLE {
-  value: "region-us.INFORMATION_SCHEMA.JOBS_BY_PROJECT"
-  export: override_optional
+constant: AUDIT_LOG_TABLE {
+  value: "chris-playground-297209.san_francisco.cloudaudit_googleapis_com_data_access"
+  export: override_required
 }

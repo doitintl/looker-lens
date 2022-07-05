@@ -1,7 +1,7 @@
 {
     "csvOptions": {
         "allowJaggedRows": false,
-        "allowQuotedNewlines": false,
+        "allowQuotedNewlines": true,
         "encoding": "UTF-8",
         "fieldDelimiter": ",",
         "quote": "\"",
@@ -200,27 +200,27 @@
             },
             {
                 "name": "query_custom_fields",
-                "type": "JSON",
+                "type": "STRING",
                 "mode": "NULLABLE"
             },
             {
                 "name": "query_fields_used",
-                "type": "JSON",
+                "type": "STRING",
                 "mode": "NULLABLE"
             },
             {
                 "name": "query_fill_fields",
-                "type": "json",
+                "type": "STRING",
                 "mode": "NULLABLE"
             },
             {
                 "name": "query_filters",
-                "type": "JSON",
+                "type": "STRING",
                 "mode": "NULLABLE"
             },
             {
                 "name": "query_pivots_used",
-                "type": "JSON",
+                "type": "STRING",
                 "mode": "NULLABLE"
             },
             {
