@@ -3,9 +3,6 @@ include: "/views/*.view"
 explore: history_data {
   description: "This explore allows you to slice and dice your looker history data togther with metrics from GCP. The default range of data you are looking at is in the past 30 days"
 
-  always_filter: {
-    filters: [billing_export.export_date: "30 days", history_data.history_created_date: "30 days"]
-  }
   label: "LOOKER LENS 🔎"
 
   join: billing_export {
