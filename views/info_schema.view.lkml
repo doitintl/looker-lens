@@ -24,6 +24,13 @@ view: info_schema {
     group_item_label: "Bi Engine Mode"
   }
 
+  dimension: bi_engine_statistics__bi_engine_reasons_2 {
+    type: string
+    sql:  (SELECT bi_engine_reason FROM  UNNEST(${TABLE}.bi_engine_statistics.bi_engine_reasons) as bi_engine_reason WHERE job_type = "QUERY"  LIMIT 1) ;;
+    group_label: "Bi Engine Statistics"
+    group_item_label: "Bi Engine Reasons"
+  }
+
   # This field is hidden, which means it will not show up in Explore.
   # If you want this field to be displayed, remove "hidden: yes".
 
