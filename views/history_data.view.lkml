@@ -65,6 +65,7 @@ view: history_data {
     sql: ${TABLE}.history_attempted_cache ;;
     view_label: "History"
     label: "Attempted Cache"
+    group_label: "Cache"
   }
 
   dimension: history_cache_key {
@@ -72,6 +73,7 @@ view: history_data {
     sql: ${TABLE}.history_cache_key ;;
     view_label: "History"
     label: "Cache Key"
+    group_label: "Cache"
   }
 
   dimension_group: history_completed {
@@ -95,6 +97,7 @@ view: history_data {
     sql: ${TABLE}.history_connection_id ;;
     view_label: "History"
     label: "Connection ID"
+    group_label: "Connection"
   }
 
   dimension: history_connection_name {
@@ -102,6 +105,7 @@ view: history_data {
     sql: ${TABLE}.history_connection_name ;;
     view_label: "History"
     label: "Connection Name"
+    group_label: "Connection"
   }
 
   dimension_group: history_created {
@@ -139,6 +143,7 @@ view: history_data {
     sql: ${TABLE}.history_dialect ;;
     view_label: "History"
     label: "Dialect"
+    group_label: "Connection"
   }
 
   dimension: history_id {
@@ -152,14 +157,16 @@ view: history_data {
     type: yesno
     sql: ${TABLE}.history_is_single_query ;;
     view_label: "History"
-    label: "Single Query"
+    label: "Is Single Query"
+    group_label: "Query Event Properties"
   }
 
   dimension: history_is_user_dashboard {
     type: yesno
     sql: ${TABLE}.history_is_user_dashboard ;;
     view_label: "History"
-    label: "User Dashboard"
+    label: "Is User Dashboard"
+    group_label: "Query Event Properties"
   }
 
   dimension: history_issuer_source {
@@ -167,6 +174,7 @@ view: history_data {
     sql: ${TABLE}.history_issuer_source ;;
     view_label: "History"
     label: "Issuer Source"
+    group_label: "Source"
   }
 
   dimension: history_message {
@@ -189,7 +197,7 @@ view: history_data {
     ]
     sql: ${TABLE}.history_most_recent_query_run_at_time ;;
     view_label: "History"
-    label: "Most Recent Query Run"
+    label: "Most Recent Query Run at"
   }
 
   dimension: history_most_recent_run_length_in_seconds {
@@ -216,6 +224,7 @@ view: history_data {
     sql: ${TABLE}.history_rebuild_pdts ;;
     view_label: "History"
     label: "Rebuild PDTs"
+    group_label: "Query Event Properties"
   }
 
   dimension: history_render_key {
@@ -237,6 +246,7 @@ view: history_data {
     sql: ${TABLE}.history_result_source ;;
     view_label: "History"
     label: "Result Source"
+    group_label: "Cache"
   }
 
   dimension: history_runtime_in_seconds {
@@ -244,6 +254,16 @@ view: history_data {
     sql: ${TABLE}.history_runtime_in_seconds ;;
     view_label: "History"
     label: "Runtime in Seconds"
+    group_label: "Runtime Fields"
+  }
+
+  dimension: history_runtime_tiers_5s {
+    type: tier
+    sql: ${history_runtime_in_seconds};;
+    tiers: [5, 10, 15, 20, 25, 30, 35, 40, 45]
+    view_label: "History"
+    label: "Runtime Tiers in 5-Second Increments"
+    group_label: "Runtime Fields"
   }
 
   dimension: history_slug {
@@ -258,6 +278,7 @@ view: history_data {
     sql: ${TABLE}.history_source ;;
     view_label: "History"
     label: "Source"
+    group_label: "Source"
   }
 
   dimension: history_status {
