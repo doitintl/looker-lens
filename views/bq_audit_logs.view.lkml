@@ -222,6 +222,7 @@ view: bq_audit_logs {
   }
 
   dimension: job_statistics__total_billed_bytes {
+    hidden: yes
     type: number
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.totalBilledBytes ;;
     group_label: "Job Statistics"
@@ -229,6 +230,7 @@ view: bq_audit_logs {
   }
 
    dimension: job_statistics__total_load_output_bytes {
+    hidden: yes
     type: number
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.totalLoadOutputBytes ;;
     group_label: "Job Statistics"
@@ -236,6 +238,7 @@ view: bq_audit_logs {
   }
 
    dimension: job_statistics__total_processed_bytes {
+    hidden: yes
     type: number
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.totalProcessedBytes ;;
     group_label: "Job Statistics"
@@ -243,6 +246,7 @@ view: bq_audit_logs {
   }
 
    dimension: job_statistics__total_slot_ms {
+    hidden: yes
     type: number
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.totalSlotMs ;;
     group_label: "Job Statistics"
@@ -250,6 +254,7 @@ view: bq_audit_logs {
   }
 
    dimension: job_statistics__total_tables_processed {
+    hidden: yes
     type: number
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.totalTablesProcessed ;;
     group_label: "Job Statistics"
@@ -257,6 +262,7 @@ view: bq_audit_logs {
   }
 
    dimension: job_statistics__total_views_processed {
+    hidden: yes
     type: number
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.totalViewsProcessed ;;
     group_label: "Job Statistics"
@@ -319,10 +325,6 @@ view: bq_audit_logs {
     sql: ${TABLE}.receiveTimestamp ;;
   }
 
-  measure: count {
-    type: count
-  }
-
 }
 
 # The name of this view in Looker is "Cloudaudit Googleapis Com Data Access Job Completed Event Job Job Configuration Labels"
@@ -383,21 +385,6 @@ view: job_statistics__reservation_usage {
     group_label: "Reservation Usage"
   }
 
-  # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
-  # measures for this dimension, but you can also add measures of many different aggregates.
-  # Click on the type parameter to see all the options in the Quick Help panel on the right.
-
-  measure: total_slot_ms {
-    type: sum
-    sql: ${slot_ms} ;;
-    group_label: "Reservation Usage"
-  }
-
-  measure: average_slot_ms {
-    type: average
-    sql: ${slot_ms} ;;
-    group_label: "Reservation Usage"
-  }
 }
 
 # The name of this view in Looker is "Cloudaudit Googleapis Com Data Access Job Completed Event Job Job Statistics Referenced Views"

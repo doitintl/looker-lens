@@ -45,15 +45,6 @@ view: billing_export {
     sql: ${TABLE}.cost ;;
   }
 
-  measure: total_cost {
-    type: sum
-    sql: ${cost} ;;
-  }
-
-  measure: average_cost {
-    type: average
-    sql: ${cost} ;;
-  }
 
   dimension: cost_type {
     type: string
@@ -274,17 +265,7 @@ view: billing_export {
     sql: ${TABLE}.usage_start_time ;;
   }
 
-  measure: count {
-    type: count
-    drill_fields: [project__name]
-  }
 
-  measure: usage__amount_total {
-    type:  sum
-    sql: ${usage__amount} ;;
-    group_label: "Usage"
-    group_item_label: "Total Amount"
-  }
 }
 
 view: billing_export__labels {
