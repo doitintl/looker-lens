@@ -337,45 +337,28 @@ view: job_configuration__labels {
   dimension: key {
     type: string
     sql: ${TABLE}.key ;;
+    group_label: "Labels"
   }
 
   dimension: value {
     type: string
     sql: ${TABLE}.value ;;
+    group_label: "Labels"
   }
 }
 
 # The name of this view in Looker is "Cloudaudit Googleapis Com Data Access Job Completed Event Job Job Status Additional Errors"
 view: job_status__additional_errors {
-  # No primary key is defined for this view. In order to join this view in an Explore,
-  # define primary_key: yes on a dimension that has no repeated values.
-
-  # Here's what a typical dimension looks like in LookML.
-  # A dimension is a groupable field that can be used to filter query results.
-  # This dimension will be called "Code" in Explore.
-
   dimension: code {
     type: number
     sql: ${TABLE}.code ;;
-  }
-
-  # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
-  # measures for this dimension, but you can also add measures of many different aggregates.
-  # Click on the type parameter to see all the options in the Quick Help panel on the right.
-
-  measure: total_code {
-    type: sum
-    sql: ${code} ;;
-  }
-
-  measure: average_code {
-    type: average
-    sql: ${code} ;;
+    group_label: "Additional Errors"
   }
 
   dimension: message {
     type: string
     sql: ${TABLE}.message ;;
+    group_label: "Additional Errors"
   }
 }
 
@@ -391,11 +374,13 @@ view: job_statistics__reservation_usage {
   dimension: name {
     type: string
     sql: ${TABLE}.name ;;
+    group_label: "Reservation Usage"
   }
 
   dimension: slot_ms {
     type: number
     sql: ${TABLE}.slotMs ;;
+    group_label: "Reservation Usage"
   }
 
   # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
@@ -405,11 +390,13 @@ view: job_statistics__reservation_usage {
   measure: total_slot_ms {
     type: sum
     sql: ${slot_ms} ;;
+    group_label: "Reservation Usage"
   }
 
   measure: average_slot_ms {
     type: average
     sql: ${slot_ms} ;;
+    group_label: "Reservation Usage"
   }
 }
 
@@ -425,16 +412,19 @@ view: job_statistics__referenced_views {
   dimension: dataset_id {
     type: string
     sql: ${TABLE}.datasetId ;;
+    group_label: "Referenced Views"
   }
 
   dimension: project_id {
     type: string
     sql: ${TABLE}.projectId ;;
+    group_label: "Referenced Views"
   }
 
   dimension: table_id {
     type: string
     sql: ${TABLE}.tableId ;;
+    group_label: "Referenced Views"
   }
 }
 
@@ -450,16 +440,19 @@ view: job_statistics__referenced_tables {
   dimension: dataset_id {
     type: string
     sql: ${TABLE}.datasetId ;;
+    group_label: "Referenced Tables"
   }
 
   dimension: project_id {
     type: string
     sql: ${TABLE}.projectId ;;
+    group_label: "Referenced Tables"
   }
 
   dimension: table_id {
     type: string
     sql: ${TABLE}.tableId ;;
+    group_label: "Referenced Tables"
   }
 }
 
@@ -475,6 +468,7 @@ view: job_configuration__query__table_definitions {
   dimension: name {
     type: string
     sql: ${TABLE}.name ;;
+    group_label: "Table Definitions"
   }
 
   # This field is hidden, which means it will not show up in Explore.
@@ -483,6 +477,7 @@ view: job_configuration__query__table_definitions {
   dimension: source_uris {
     hidden: yes
     sql: ${TABLE}.sourceUris ;;
+    group_label: "Table Definitions"
   }
 }
 
@@ -495,8 +490,10 @@ view: job_configuration__query__table_definitions__source_uris {
   # A dimension is a groupable field that can be used to filter query results.
   # This dimension will be called "Cloudaudit Googleapis Com Data Access Job Completed Event Job Job Configuration Query Table Definitions Source Uris" in Explore.
 
-  dimension: job_configuration__query__table_definitions__source_uris {
+  dimension: table_definitions__source_uris {
     type: string
     sql: job_configuration__query__table_definitions__source_uris ;;
+    group_label: "Table Definitions"
+    group_item_label: "Source URI"
   }
 }

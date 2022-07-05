@@ -3,7 +3,7 @@ view: billing_export {
   sql_table_name: `@{BILLING_EXPORT_TABLE}`;;
   dimension: history_id {
     type: string
-    sql:  (SELECT CAST(value AS INT64) FROM UNNEST(${labels}) as label WHERE label.key = "looker-context-history_id" LIMIT 1);;
+    sql:  (SELECT CAST(value AS INT64) FROM UNNEST(${labels_array}) as label WHERE label.key = "looker-context-history_id" LIMIT 1);;
     hidden: yes
   }
 
@@ -45,10 +45,6 @@ view: billing_export {
     sql: ${TABLE}.cost ;;
   }
 
-  # A measure is a field that uses a SQL aggregate function. Here are defined sum and average
-  # measures for this dimension, but you can also add measures of many different aggregates.
-  # Click on the type parameter to see all the options in the Quick Help panel on the right.
-
   measure: total_cost {
     type: sum
     sql: ${cost} ;;
@@ -64,14 +60,6 @@ view: billing_export {
     sql: ${TABLE}.cost_type ;;
   }
 
-  # This field is hidden, which means it will not show up in Explore.
-  # If you want this field to be displayed, remove "hidden: yes".
-
-  dimension: credits {
-    hidden: yes
-    sql: ${TABLE}.credits ;;
-  }
-
   dimension: currency {
     type: string
     sql: ${TABLE}.currency ;;
@@ -80,13 +68,6 @@ view: billing_export {
   dimension: currency_conversion_rate {
     type: number
     sql: ${TABLE}.currency_conversion_rate ;;
-  }
-
-  dimension: discount__allow_preemptible {
-    type: yesno
-    sql: ${TABLE}.discount.allow_preemptible ;;
-    group_label: "Discount"
-    group_item_label: "Allow Preemptible"
   }
 
   dimension: discount__is_commitment {
@@ -113,6 +94,7 @@ view: billing_export {
   dimension: exclude_discount {
     type: yesno
     sql: ${TABLE}.exclude_discount ;;
+    group_label: "Discount"
   }
 
   dimension_group: export {
@@ -121,42 +103,17 @@ view: billing_export {
       raw,
       time,
       date,
-      week,
-      month,
-      quarter,
-      year
     ]
     sql: ${TABLE}.export_time ;;
-  }
-
-  dimension: gcp_metrics {
-    hidden: yes
-    sql: ${TABLE}.gcp_metrics ;;
   }
 
   dimension: invoice__month {
     type: string
     sql: ${TABLE}.invoice.month ;;
-    group_label: "Invoice"
-    group_item_label: "Month"
+    label: "Invoice Month"
   }
 
-  dimension: is_marketplace {
-    type: yesno
-    sql: ${TABLE}.is_marketplace ;;
-  }
-
-  dimension: is_preemptible {
-    type: yesno
-    sql: ${TABLE}.is_preemptible ;;
-  }
-
-  dimension: is_premium_image {
-    type: yesno
-    sql: ${TABLE}.is_premium_image ;;
-  }
-
-  dimension: labels {
+  dimension: labels_array {
     hidden: yes
     sql: ${TABLE}.labels ;;
   }
@@ -189,32 +146,11 @@ view: billing_export {
     group_item_label: "Zone"
   }
 
-  dimension: price_book__discount {
-    type: number
-    sql: ${TABLE}.price_book.discount ;;
-    group_label: "Price Book"
-    group_item_label: "Discount"
-  }
-
-  dimension: price_book__unit_price {
-    type: number
-    sql: ${TABLE}.price_book.unit_price ;;
-    group_label: "Price Book"
-    group_item_label: "Unit Price"
-  }
-
   dimension: project__ancestry_names {
     type: string
     sql: ${TABLE}.project.ancestry_names ;;
     group_label: "Project"
     group_item_label: "Ancestry Names"
-  }
-
-  dimension: project__ancestry_numbers {
-    type: string
-    sql: ${TABLE}.project.ancestry_numbers ;;
-    group_label: "Project"
-    group_item_label: "Ancestry Numbers"
   }
 
   dimension: project__id {
@@ -245,16 +181,6 @@ view: billing_export {
     group_item_label: "Number"
   }
 
-  dimension: project_id {
-    type: string
-    sql: ${TABLE}.project_id ;;
-  }
-
-  dimension: report {
-    hidden: yes
-    sql: ${TABLE}.report ;;
-  }
-
   dimension: service_description {
     type: string
     sql: ${TABLE}.service_description ;;
@@ -273,11 +199,6 @@ view: billing_export {
   dimension: sku_id {
     type: string
     sql: ${TABLE}.sku_id ;;
-  }
-
-  dimension: system_labels {
-    hidden: yes
-    sql: ${TABLE}.system_labels ;;
   }
 
   dimension: usage__amount {
@@ -308,7 +229,7 @@ view: billing_export {
     group_item_label: "Unit"
   }
 
-  dimension_group: usage_date {
+  dimension_group: usage {
     type: time
     timeframes: [
       raw,
@@ -324,6 +245,7 @@ view: billing_export {
   }
 
   dimension_group: usage_end {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -338,6 +260,7 @@ view: billing_export {
   }
 
   dimension_group: usage_start {
+    hidden: yes
     type: time
     timeframes: [
       raw,
@@ -362,32 +285,6 @@ view: billing_export {
     group_label: "Usage"
     group_item_label: "Total Amount"
   }
-
-  ### combined metrics
-  measure: gb_per_history_id {
-    group_label: "Advanced"
-    sql: ${info_schema.total_gigabytes_processed} / ${history_data.history_count};;
-  }
-
-
-  measure: max_query_gb {
-    group_label: "Advanced"
-    type: max
-    sql: ${info_schema.total_gigabytes_processed}/pow(10,9) ;;
-  }
-
-
-
-  #max query price, > drill down per dashbaord
-  #max query bytes
-  #max slot consumption
-  #max (bq)query duration
-  #avg (bq)query duration
-  #count of active users,
-  #count of query ids
-
-
-
 }
 
 view: billing_export__labels {
@@ -400,129 +297,13 @@ view: billing_export__labels {
   dimension: key {
     type: string
     sql: key ;;
+    group_label: "Labels"
   }
 
   dimension: value {
     type: string
     sql: value ;;
-  }
-}
-
-view: billing_export__report {
-  dimension: billing_export__report {
-    type: string
-    hidden: yes
-    sql: billing_export__report ;;
-  }
-
-  dimension: cost {
-    type: number
-    sql: ${TABLE}.cost ;;
-  }
-
-  measure: total_cost {
-    type: sum
-    sql: ${cost} ;;
-  }
-
-  measure: average_cost {
-    type: average
-    sql: ${cost} ;;
-  }
-
-  dimension: credit {
-    type: string
-    sql: credit ;;
-  }
-
-  dimension: savings {
-    type: number
-    sql: savings ;;
-  }
-
-  dimension: usage {
-    type: number
-    sql: usage ;;
-  }
-}
-
-view: billing_export__credits {
-  drill_fields: [id]
-
-  dimension: id {
-    primary_key: yes
-    type: string
-    sql: id ;;
-  }
-
-  dimension: amount {
-    type: number
-    sql: amount ;;
-  }
-
-  measure: total_amount {
-    type: sum
-    sql: ${amount} ;;
-  }
-
-  measure: average_amount {
-    type: average
-    sql: ${amount} ;;
-  }
-
-  dimension: billing_export__credits {
-    type: string
-    hidden: yes
-    sql: billing_export__credits ;;
-  }
-
-  dimension: full_name {
-    type: string
-    sql: full_name ;;
-  }
-
-  dimension: name {
-    type: string
-    sql: name ;;
-  }
-
-  dimension: type {
-    type: string
-    sql: type ;;
-  }
-}
-
-view: billing_export__gcp_metrics {
-
-  dimension: billing_export__gcp_metrics {
-    type: string
-    hidden: yes
-    sql: billing_export__gcp_metrics ;;
-  }
-
-  dimension: key {
-    type: string
-    sql: key ;;
-  }
-
-  dimension: type {
-    type: string
-    sql: type ;;
-  }
-
-  dimension: value {
-    type: number
-    sql: value ;;
-  }
-
-  measure: total_value {
-    type: sum
-    sql: ${value} ;;
-  }
-
-  measure: average_value {
-    type: average
-    sql: ${value} ;;
+    group_label: "Labels"
   }
 }
 
@@ -530,11 +311,15 @@ view: billing_export__project__labels {
   dimension: key {
     type: string
     sql: ${TABLE}.key ;;
+    group_label: "Project"
+    group_item_label: "Project Labels Key"
   }
 
   dimension: value {
     type: string
     sql: ${TABLE}.value ;;
+    group_label: "Project"
+    group_item_label: "Project Labels Value"
   }
 
 
