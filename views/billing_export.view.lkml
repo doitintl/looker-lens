@@ -3,9 +3,15 @@ view: billing_export {
   sql_table_name: `@{BILLING_EXPORT_TABLE}`;;
 
   dimension: history_id {
-    type: string
+    type: number
     sql:  (SELECT CAST(value AS INT64) FROM UNNEST(${labels_array}) as label WHERE label.key = "looker-context-history_id" LIMIT 1);;
+    # hidden: yes
+  }
+
+  dimension: primary_key {
+    primary_key: yes
     hidden: yes
+    sql: CONCAT(${history_id}, FORMAT_TIMESTAMP("%c", ${export_raw} ));;
   }
 
   # dimension: adjustment_info__description {

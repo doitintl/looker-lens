@@ -25,14 +25,14 @@ view: +bq_audit_logs {
 
   measure: total_job_statistics__total_slot_ms {
     type: sum
-    sql: ${job_statistics__total_slot_ms}lotMs} ;;
+    sql: ${job_statistics__total_slot_ms} ;;
     group_label: "Totals"
     group_item_label: "Slot Ms"
   }
 
   measure: total_job_statistics__total_tables_processed {
     type: number
-    sql: ${job_statistics__total_tables_processed}ablesProcessed} ;;
+    sql: ${job_statistics__total_tables_processed} ;;
     group_label: "Totals"
     group_item_label: "Tables Processed"
   }
@@ -69,7 +69,7 @@ view: +bq_audit_logs {
 
   measure: avg_job_statistics__total_tables_processed {
     type: average
-    sql: ${job_statistics__total_tables_processed}ablesProcessed} ;;
+    sql: ${job_statistics__total_tables_processed} ;;
     group_label: "Average"
     group_item_label: "Tables Processed"
   }

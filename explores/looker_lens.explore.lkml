@@ -30,7 +30,7 @@ explore: history_data {
 
   join: bq_audit_logs {
     view_label: "BigQuery"
-    sql_on: ${bq_audit_logs.history_id}) = ${history_data.history_id} ;;
+    sql_on: ${bq_audit_logs.history_id} = ${history_data.history_id} ;;
     relationship: one_to_many
   }
 

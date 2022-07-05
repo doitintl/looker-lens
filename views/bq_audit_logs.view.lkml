@@ -4,7 +4,7 @@ view: bq_audit_logs {
   sql_table_name: `@{AUDIT_LOG_TABLE}`;;
 
   dimension: history_id {
-    hidden: yes
+    # hidden: yes
     type: string
     sql:   (SELECT CAST(value AS INT64) FROM UNNEST(${labels_array}) as label WHERE label.key = "looker-context-history_id" LIMIT 1);;
     label: "Looker History ID"
