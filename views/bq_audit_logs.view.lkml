@@ -1,5 +1,6 @@
 # The name of this view in Looker is "Cloudaudit Googleapis Com Data Access"
 view: bq_audit_logs {
+  view_label: "BQ Audit Logs"
   # The sql_table_name parameter indicates the underlying database table
   # to be used for all fields in this view.
   sql_table_name: `chris-playground-297209.san_francisco.cloudaudit_googleapis_com_data_access`
@@ -10,6 +11,12 @@ view: bq_audit_logs {
   # Here's what a typical dimension looks like in LookML.
   # A dimension is a groupable field that can be used to filter query results.
   # This dimension will be called "HTTP Request Cache Fill Bytes" in Explore.
+
+  dimension: history_id {
+    type: string
+    sql:   (SELECT CAST(value AS INT64) FROM UNNEST(${labels_array}) as label WHERE label.key = "looker-context-history_id" LIMIT 1);;
+    label: "Looker History ID"
+  }
 
   dimension: principal_email {
     type: string
@@ -35,7 +42,7 @@ view: bq_audit_logs {
     label: "Labels"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_configuration__query__create_disposition {
+   dimension: job_configuration__query__create_disposition {
     type: string
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.createDisposition ;;
     label: "Create Disposition"
@@ -167,7 +174,7 @@ view: bq_audit_logs {
       year
     ]
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.endTime ;;
-    label: "End"
+    label: "Job End"
   }
 
   dimension: job_statistics__query_output_row_count {
@@ -198,7 +205,7 @@ view: bq_audit_logs {
     group_item_label: "Reservation Usage"
   }
 
-  dimension_group: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_statistics__start {
+  dimension_group: job_statistics__start {
     type: time
     timeframes: [
       raw,
@@ -210,47 +217,49 @@ view: bq_audit_logs {
       year
     ]
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.startTime ;;
+    label: "Job Start"
+
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_statistics__total_billed_bytes {
+  dimension: job_statistics__total_billed_bytes {
     type: number
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.totalBilledBytes ;;
-    group_label: "Job Completed Event Job Job Statistics"
+    group_label: "Job Statistics"
     group_item_label: "Total Billed Bytes"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_statistics__total_load_output_bytes {
+   dimension: job_statistics__total_load_output_bytes {
     type: number
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.totalLoadOutputBytes ;;
-    group_label: "Job Completed Event Job Job Statistics"
+    group_label: "Job Statistics"
     group_item_label: "Total Load Output Bytes"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_statistics__total_processed_bytes {
+   dimension: job_statistics__total_processed_bytes {
     type: number
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.totalProcessedBytes ;;
-    group_label: "Job Completed Event Job Job Statistics"
+    group_label: "Job Statistics"
     group_item_label: "Total Processed Bytes"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_statistics__total_slot_ms {
+   dimension: job_statistics__total_slot_ms {
     type: number
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.totalSlotMs ;;
-    group_label: "Job Completed Event Job Job Statistics"
+    group_label: "Job Statistics"
     group_item_label: "Total Slot Ms"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_statistics__total_tables_processed {
+   dimension: job_statistics__total_tables_processed {
     type: number
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.totalTablesProcessed ;;
-    group_label: "Job Completed Event Job Job Statistics"
+    group_label: "Job Statistics"
     group_item_label: "Total Tables Processed"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_statistics__total_views_processed {
+   dimension: job_statistics__total_views_processed {
     type: number
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.totalViewsProcessed ;;
-    group_label: "Job Completed Event Job Job Statistics"
+    group_label: "Job Statistics"
     group_item_label: "Total Views Processed"
   }
 
