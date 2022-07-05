@@ -11,147 +11,136 @@ view: bq_audit_logs {
   # A dimension is a groupable field that can be used to filter query results.
   # This dimension will be called "HTTP Request Cache Fill Bytes" in Explore.
 
-  dimension: protopayload_auditlog__authentication_info__principal_email {
+  dimension: principal_email {
     type: string
     sql: ${TABLE}.protopayload_auditlog.authenticationInfo.principalEmail ;;
-    group_label: "Authentication Info"
-    group_item_label: "Principal Email"
+    label: "Principal Email"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__event_name {
+  dimension: event_name {
     type: string
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.eventName ;;
-    group_label: "Job Completed Event"
-    group_item_label: "Event Name"
+    label: "Event Name"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_configuration__dry_run {
+  dimension: dry_run {
     type: yesno
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.dryRun ;;
-    group_label: "Job Completed Event Job Job Configuration"
-    group_item_label: "Dry Run"
+    label: "Dry Run"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_configuration__labels {
+  dimension: labels_array {
     hidden: yes
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.labels ;;
-    group_label: "Job Completed Event Job Job Configuration"
-    group_item_label: "Labels"
+    label: "Labels"
   }
 
   dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_configuration__query__create_disposition {
     type: string
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.createDisposition ;;
-    group_label: "Job Completed Event Job Job Configuration Query"
-    group_item_label: "Create Disposition"
+    label: "Create Disposition"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_configuration__query__default_dataset__dataset_id {
+  dimension: default_dataset__dataset_id {
     type: string
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.defaultDataset.datasetId ;;
-    group_label: "Job Completed Event Job Job Configuration Query Default Dataset"
-    group_item_label: "Dataset ID"
+    group_label: "Default Dataset"
+    label: "Dataset ID"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_configuration__query__default_dataset__project_id {
+  dimension: default_dataset__project_id {
     type: string
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.defaultDataset.projectId ;;
-    group_label: "Job Completed Event Job Job Configuration Query Default Dataset"
+    group_label: "Default Dataset"
     group_item_label: "Project ID"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_configuration__query__destination_table__dataset_id {
+  dimension: destination_table__dataset_id {
     type: string
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.destinationTable.datasetId ;;
-    group_label: "Job Completed Event Job Job Configuration Query Destination Table"
+    group_label: "Destination Table"
     group_item_label: "Dataset ID"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_configuration__query__destination_table__project_id {
+  dimension: destination_table__project_id {
     type: string
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.destinationTable.projectId ;;
-    group_label: "Job Completed Event Job Job Configuration Query Destination Table"
+    group_label: "Destination Table"
     group_item_label: "Project ID"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_configuration__query__destination_table__table_id {
+  dimension: destination_table__table_id {
     type: string
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.destinationTable.tableId ;;
-    group_label: "Job Completed Event Job Job Configuration Query Destination Table"
+    group_label: "Destination Table"
     group_item_label: "Table ID"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_configuration__query__destination_table_encryption__kms_key_name {
+  dimension: kms_key_name {
     type: string
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.destinationTableEncryption.kmsKeyName ;;
-    group_label: "Job Completed Event Job Job Configuration Query Destination Table Encryption"
-    group_item_label: "Kms Key Name"
+    label: "Kms Key Name"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_configuration__query__query {
+  dimension: query {
     type: string
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.query ;;
-    group_label: "Job Completed Event Job Job Configuration Query"
-    group_item_label: "Query"
+    label: "Query"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_configuration__query__query_priority {
+  dimension: query_priority {
     type: string
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.queryPriority ;;
-    group_label: "Job Completed Event Job Job Configuration Query"
-    group_item_label: "Query Priority"
+    label: "Query Priority"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_configuration__query__statement_type {
+  dimension: statement_type {
     type: string
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.statementType ;;
-    group_label: "Job Completed Event Job Job Configuration Query"
-    group_item_label: "Statement Type"
+    label: "Statement Type"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_configuration__query__table_definitions {
+  dimension: table_definitions_array {
     hidden: yes
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.tableDefinitions ;;
-    group_label: "Job Completed Event Job Job Configuration Query"
-    group_item_label: "Table Definitions"
+    label: "Table Definitions"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_configuration__query__write_disposition {
+  dimension: write_disposition {
     type: string
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobConfiguration.query.writeDisposition ;;
-    group_label: "Job Completed Event Job Job Configuration Query"
-    group_item_label: "Write Disposition"
+    label: "Write Disposition"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_name__job_id {
+  dimension: job_name__job_id {
     type: string
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobName.jobId ;;
-    group_label: "Job Completed Event Job Job Name"
+    group_label: "Job Name"
     group_item_label: "Job ID"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_name__location {
+  dimension: job_name__location {
     type: string
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobName.location ;;
-    group_label: "Job Completed Event Job Job Name"
+    group_label: "Job Name"
     group_item_label: "Location"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_name__project_id {
+  dimension: job_name__project_id {
     type: string
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobName.projectId ;;
-    group_label: "Job Completed Event Job Job Name"
+    group_label: "Job Name"
     group_item_label: "Project ID"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_statistics__billing_tier {
+  dimension: job_statistics__billing_tier {
     type: number
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.billingTier ;;
-    group_label: "Job Completed Event Job Job Statistics"
+    group_label: "Job Statistics"
     group_item_label: "Billing Tier"
   }
 
-  dimension_group: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_statistics__create {
+  dimension_group: job_statistics__create {
     type: time
     timeframes: [
       raw,
@@ -163,9 +152,10 @@ view: bq_audit_logs {
       year
     ]
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.createTime ;;
+    label: "Create"
   }
 
-  dimension_group: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_statistics__end {
+  dimension_group: job_statistics__end {
     type: time
     timeframes: [
       raw,
@@ -177,33 +167,34 @@ view: bq_audit_logs {
       year
     ]
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.endTime ;;
+    label: "End"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_statistics__query_output_row_count {
+  dimension: job_statistics__query_output_row_count {
     type: number
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.queryOutputRowCount ;;
-    group_label: "Job Completed Event Job Job Statistics"
+    group_label: "Job Statistics"
     group_item_label: "Query Output Row Count"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_statistics__referenced_tables {
+  dimension: job_statistics__referenced_tables {
     hidden: yes
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.referencedTables ;;
-    group_label: "Job Completed Event Job Job Statistics"
+    group_label: "Job Statistics"
     group_item_label: "Referenced Tables"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_statistics__referenced_views {
+  dimension: job_statistics__referenced_views_array {
     hidden: yes
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.referencedViews ;;
-    group_label: "Job Completed Event Job Job Statistics"
+    group_label: "Job Statistics"
     group_item_label: "Referenced Views"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_statistics__reservation_usage {
+  dimension: job_statistics__reservation_usage {
     hidden: yes
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatistics.reservationUsage ;;
-    group_label: "Job Completed Event Job Job Statistics"
+    group_label: "Job Statistics"
     group_item_label: "Reservation Usage"
   }
 
@@ -263,31 +254,31 @@ view: bq_audit_logs {
     group_item_label: "Total Views Processed"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_status__additional_errors {
+  dimension: job_status__additional_errors_array {
     hidden: yes
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatus.additionalErrors ;;
     group_label: "Job Completed Event Job Job Status"
     group_item_label: "Additional Errors"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_status__error__code {
+  dimension: job_status__error__code {
     type: number
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatus.error.code ;;
-    group_label: "Job Completed Event Job Job Status Error"
-    group_item_label: "Code"
+    group_label: "Status"
+    group_item_label: "Error Code"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_status__error__message {
+  dimension: job_status__error__message {
     type: string
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatus.error.message ;;
-    group_label: "Job Completed Event Job Job Status Error"
-    group_item_label: "Message"
+    group_label: "Status"
+    group_item_label: "Error Message"
   }
 
-  dimension: protopayload_auditlog__servicedata_v1_bigquery__job_completed_event__job__job_status__state {
+  dimension: job_status__state {
     type: string
     sql: ${TABLE}.protopayload_auditlog.servicedata_v1_bigquery.jobCompletedEvent.job.jobStatus.state ;;
-    group_label: "Job Completed Event Job Job Status"
+    group_label: "Status"
     group_item_label: "State"
   }
 
